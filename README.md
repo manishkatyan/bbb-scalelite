@@ -151,4 +151,30 @@ Secret: c2d3a8e27844d56060436f3129acd945d7531fe77e661716
 ```
 
 ## Handling recordings
+We use NFS for recordings. 
+
+### (1) On Scalelite Server [NFS Host]:
+```sh
+sudo apt update
+sudo apt install nfs-kernel-server
+```
+
+#### Setup Firewall
+Allow ports 22, 80 and 443 for normal Scalelite functioning. 
+Then execute the following to allow connection from BBB server (BBB_SERVER_IP) for NFS:
+```sh
+$ ufw allow from BBB_SERVER_IP to any port nfs
+```
+
+Add following in /etc/exports:
+```sh
+/mnt/scalelite-recordings BBB_SERVER_IP(rw,sync,no_root_squash) BBB_SECOND_SERVER_IP(rw,sync,no_root_squash)
+```sh
+
+Then execute the following to start NFS server:
+```sh
+exportfs -r
+sudo systemctl start nfs-kernel-server.service 
+```
+
 
