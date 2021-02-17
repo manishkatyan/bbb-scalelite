@@ -1,5 +1,5 @@
 # scalelite-run
-An easy-to-follow step-by-step process to install Scalelite without any hassles
+An easy-to-follow step-by-step process to install Scalelite load balancer for BigBlueButton
 
 ## Minimum Server Requirements
 
