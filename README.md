@@ -194,13 +194,6 @@ On each BigBlueButton server, install the following files to the listed paths:
 - [scalelite.yml](https://raw.githubusercontent.com/blindsidenetworks/scalelite/master/bigbluebutton/scalelite.yml): install to the directory /usr/local/bigbluebutton/core/scripts
 - [scalelite_batch_import.sh](https://raw.githubusercontent.com/blindsidenetworks/scalelite/master/bigbluebutton/scalelite_batch_import.sh): install to the directory /usr/local/bigbluebutton/core/scripts. 
 
-You need to make a small correction in scalelite_batch_import.sh script:
-```sh
-( cd "$scripts_dir" && sudo -n -u bigbluebutton ruby ./post_publish/scalelite_post_publish.rb -m "$record_id" )
-
-chmod ugo+x scalelite_batch_import.sh
-```sh
-
 You need to update `scalelite.yml`
 ```sh
 vi scalelite.yml
@@ -209,13 +202,9 @@ work_dir: /var/bigbluebutton/recording/scalelite
 spool_dir: /mnt/scalelite-recordings/var/bigbluebutton/spool
 ```
 
-Make scalelite_batch_import.sh executable
-```sh
-chmod ugo+x scalelite_batch_import.sh
-```
-
 In case you need to manually transfer recordings from BigBlueButton server to Scalelite, execute the following:
 ```sh
+chmod +x scalelite_batch_import.sh
 ./scalelite_batch_import.sh
 ```
 Run these commands to create the group and add the bigbluebutton user to the group
