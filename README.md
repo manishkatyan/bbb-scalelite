@@ -41,7 +41,8 @@ chmod +x /usr/local/bin/docker-compose
 
 ### Fetching the scripts
 ```sh
-git clone https://github.com/jfederico/scalelite-run cd scalelite-run
+git clone https://github.com/manishkatyan/scalelite-run 
+cd scalelite-run
 ```
 
 ### Initializing environment variables
