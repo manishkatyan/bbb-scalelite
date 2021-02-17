@@ -153,7 +153,7 @@ Secret: c2d3a8e27844d56060436f3129acd945d7531fe77e661716
 ## Handling recordings
 We use NFS for recordings. 
 
-### (1) On Scalelite Server [NFS Host]:
+### (1) On Scalelite Server [NFS Host]
 ```sh
 sudo apt update
 sudo apt install nfs-kernel-server
@@ -176,6 +176,74 @@ Then execute the following to start NFS server:
 ```sh
 exportfs -r
 sudo systemctl start nfs-kernel-server.service 
+```
+
+### (2) On BBB Server [NFS Client]
+
+Create scalellite directory as detailed below
+```sh
+sudo cd /var/bigbluebutton/recording
+sudo mkdir scalelite
+sudo chown bigbluebutton:bigbluebutton scalelite
+```
+
+On each BigBlueButton server, install the following files to the listed paths:
+
+- [scalelite_post_publish.rb](https://raw.githubusercontent.com/blindsidenetworks/scalelite/master/bigbluebutton/scalelite_post_publish.rb): install to the directory /usr/local/bigbluebutton/core/scripts/post_publish
+- [scalelite.yml](https://raw.githubusercontent.com/blindsidenetworks/scalelite/master/bigbluebutton/scalelite.yml): install to the directory /usr/local/bigbluebutton/core/scripts
+- [scalelite_batch_import.sh](https://raw.githubusercontent.com/blindsidenetworks/scalelite/master/bigbluebutton/scalelite_batch_import.sh): install to the directory /usr/local/bigbluebutton/core/scripts. 
+
+You need to make a small correction in scalelite_batch_import.sh script:
+```sh
+( cd "$scripts_dir" && sudo -n -u bigbluebutton ruby ./post_publish/scalelite_post_publish.rb -m "$record_id" )
+$ chmod ugo+x scalelite_batch_import.sh
+```sh
+
+You need to update `scalelite.yml`
+```sh
+vi scalelite.yml
+
+work_dir: /var/bigbluebutton/recording/scalelite
+spool_dir: /mnt/scalelite-recordings/var/bigbluebutton/spool
+```
+
+Make scalelite_batch_import.sh executable
+```sh
+chmod ugo+x scalelite_batch_import.sh
+```
+
+In case you need to manually transfer recordings from BigBlueButton server to Scalelite, execute the following:
+```sh
+./scalelite_batch_import.sh
+```
+Run these commands to create the group and add the bigbluebutton user to the group
+```sh
+# Create a new group with GID 2000
+sudo groupadd -g 2000 scalelite-spool
+
+# Add the bigbluebutton user to the group
+$ sudo usermod -a -G scalelite-spool bigbluebutton
+
+# In case you face any permission issue, do the following [reference](https://groups.google.com/g/bigbluebutton-setup/c/LT1IFWG9lQE/m/bpDpaG1UAgAJ)
+sudo usermod -a -G bigbluebutton bigbluebutton
+```
+
+Now verify that there is no permission issue when bigbluebutton user creates a file, the file should be available on Scalelite server:
+```sh
+sudo -n -u bigbluebutton touch /mnt/scalelite-recordings/var/bigbluebutton/spool/toto.txt
+```
+
+Install NFS client.
+```sh
+sudo apt update
+sudo apt install nfs-common
+mkdir /mnt/scalelite-recordings
+mount SCALELITE_SERVER_IP:/mnt/scalelite-recordings /mnt/scalelite-recordings
+```
+
+Now execute the following command to check recordings folders are correctly mounted on BBB server:
+```sh
+df -h
 ```
 
 
