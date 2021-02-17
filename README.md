@@ -1,7 +1,27 @@
 # scalelite-run
 An easy-to-follow step-by-step process to install Scalelite without any hassles
 
-## Prepare the environment Updating the VM
+## Minimum Server Requirements
+
+For the Scalelite Server, the minimum recommended server requirements are:
+
+- 4 CPU Cores
+- 8 GB Memory
+
+For the external Redis Cache, the minimum recommended server requirements are:
+
+- 2 CPU Cores
+- 0.5GB Memory
+- Persistence must be enabled
+
+## Configure your Front-End to use Scalelite
+
+To switch your Front-End application to use Scalelite instead of a single BigBlueButton server, there are 2 changes that need to be made
+
+- BigBlueButton server url should be set to the url of your Scalelite deployment http(s)://<scalelite-hostname>/bigbluebutton/api/
+- BigBlueButton shared secret should be set to the LOADBALANCER_SECRET value that you set in /etc/default/scalelite
+
+## Prepare the environment
 ```sh
 sudo -i
 apt-get update 
