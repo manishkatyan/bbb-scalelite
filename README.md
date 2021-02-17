@@ -1,5 +1,5 @@
 # scalelite-run
-A simple deployment as for production using docker-compose
+An easy-to-follow step-by-step process to install Scalelite without any hassles
 
 ## Prepare the environment Updating the VM
 ```sh
