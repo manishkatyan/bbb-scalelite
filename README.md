@@ -196,7 +196,8 @@ On each BigBlueButton server, install the following files to the listed paths:
 You need to make a small correction in scalelite_batch_import.sh script:
 ```sh
 ( cd "$scripts_dir" && sudo -n -u bigbluebutton ruby ./post_publish/scalelite_post_publish.rb -m "$record_id" )
-$ chmod ugo+x scalelite_batch_import.sh
+
+chmod ugo+x scalelite_batch_import.sh
 ```sh
 
 You need to update `scalelite.yml`
@@ -222,7 +223,7 @@ Run these commands to create the group and add the bigbluebutton user to the gro
 sudo groupadd -g 2000 scalelite-spool
 
 # Add the bigbluebutton user to the group
-$ sudo usermod -a -G scalelite-spool bigbluebutton
+sudo usermod -a -G scalelite-spool bigbluebutton
 
 # In case you face any permission issue, do the following [reference](https://groups.google.com/g/bigbluebutton-setup/c/LT1IFWG9lQE/m/bpDpaG1UAgAJ)
 sudo usermod -a -G bigbluebutton bigbluebutton
@@ -246,4 +247,12 @@ Now execute the following command to check recordings folders are correctly moun
 df -h
 ```
 
-
+Add the following entry to your `/etc/fstab` file in each BBB server:
+```sh
+SCALELITE_SERVER_IP:/mnt/scalelite-recordings /mnt/scalelite-recordings nfs defaults 0 0
+```
+Restart BigBlueButton server
+```sh
+sudo bbb-conf --restart
+sudo bbb-conf --check
+```
