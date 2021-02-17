@@ -112,3 +112,43 @@ But you can add some BigBlueButton servers.
 ```sh
 docker exec -i scalelite-api bundle exec rake servers:add[https://bbb1.example.com/bigbluebutton/api/,bbb-secret]
 ```
+
+That should give you an ID for each server added.
+```sh
+OK
+id: 27243e91–35a3–42ee-80a7-bd5980b0728f
+```
+
+Use the server ID for enabling the server.
+```sh
+docker exec -i scalelite-api bundle exec rake servers:enable[27243e91–35a3–42ee-80a7-bd5980b0728f]
+```
+
+Servers can be also be disabled.
+```sh
+docker exec -i scalelite-api bundle exec rake servers:disable[27243e91–35a3–42ee-80a7-bd5980b0728f]
+```
+
+Pulled out of the pool.
+```sh
+docker exec -i scalelite-api bundle exec rake servers:panic[27243e91–35a3–42ee-80a7-bd5980b0728f]
+```
+
+Or removed.
+```sh
+docker exec -i scalelite-api bundle exec rake servers:remove[27243e91–35a3–42ee-80a7-bd5980b0728f]
+```
+
+For more detailed information regarding server management, read the README file in [the official git repository](https://github.com/blindsidenetworks/scalelite).
+
+## Using BigBlueButton servers through Scalelite
+
+Your BigBlueButton servers are now ready to be used. You can use Scalelite with any external application (such as Moodle or Wordpress) by setting its hostname as the BigBlueButton URL and the secret generated (LOADBALANCER_SECRET) during the installation as the BigBlueButton Secret.
+
+```sh
+URL: https://scalelite.example.com/bigbluebutton/api/
+Secret: c2d3a8e27844d56060436f3129acd945d7531fe77e661716
+```
+
+## Handling recordings
+
