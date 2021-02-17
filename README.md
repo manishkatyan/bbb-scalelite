@@ -256,3 +256,5 @@ Restart BigBlueButton server
 sudo bbb-conf --restart
 sudo bbb-conf --check
 ```
+
+A large part of above installation steps shared by [Jesus Federico](https://github.com/jfederico)
