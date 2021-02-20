@@ -1,4 +1,4 @@
-# scalelite-run
+# bbb-scalelite
 An easy-to-follow step-by-step process to install Scalelite load balancer for BigBlueButton
 
 To learn more about Scalelite, check-out [the official repository](https://github.com/blindsidenetworks/scalelite). 
