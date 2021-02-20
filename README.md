@@ -274,4 +274,4 @@ sudo bbb-conf --restart
 sudo bbb-conf --check
 ```
 
-A large part of above installation steps shared by [Jesus Federico](https://github.com/jfederico)
+A large part of above installation steps is thanks to [Jesus Federico](https://github.com/jfederico)
