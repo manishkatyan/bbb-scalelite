@@ -1,6 +1,8 @@
 # scalelite-run
 An easy-to-follow step-by-step process to install Scalelite load balancer for BigBlueButton
 
+To learn more about Scalelite, check-out [the official repository](https://github.com/blindsidenetworks/scalelite). 
+
 ## Minimum Server Requirements
 
 For the Scalelite Server, the minimum recommended server requirements are:
