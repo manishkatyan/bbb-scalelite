@@ -274,4 +274,13 @@ sudo bbb-conf --restart
 sudo bbb-conf --check
 ```
 
+## How to test Scalelite
+
+- Visit [API-MATE](https://mconf.github.io/api-mate/)
+- Enter Server: http://<your-scalelite-domain>/bigbluebutton/api 
+- Enter Secret: LOADBALANCER_SECRET
+- Now you can create and join meetings, which will happen to one of the BBB servers that you have added to your Scalelite server
+
+### Credits
+
 A large part of above installation steps is thanks to [Jesus Federico](https://github.com/jfederico)
