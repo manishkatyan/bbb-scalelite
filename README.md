@@ -255,6 +255,7 @@ sudo groupadd -g 2000 scalelite-spool
 sudo usermod -a -G scalelite-spool bigbluebutton
 
 # In case you face any permission issue, do the following [reference](https://groups.google.com/g/bigbluebutton-setup/c/LT1IFWG9lQE/m/bpDpaG1UAgAJ)
+sudo usermod -g scalelite-spool bigbluebutton
 sudo usermod -a -G bigbluebutton bigbluebutton
 ```
 
