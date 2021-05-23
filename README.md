@@ -16,6 +16,18 @@ For the external Redis Cache, the minimum recommended server requirements are:
 - 0.5GB Memory
 - Persistence must be enabled
 
+
+## Upgrading
+- Change the these two variables in .env 
+```
+SCALELITE_REPO=blindsidenetwks 
+SCALELITE_TAG=<scalelite version>
+```
+- If it is a major upgrade then run
+```sh
+docker exec -i scalelite-api bundle exec rake db:migrate
+```
+
 ## Configure your Front-End to use Scalelite
 
 To switch your Front-End application to use Scalelite instead of a single BigBlueButton server, there are 2 changes that need to be made
